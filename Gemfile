@@ -46,6 +46,7 @@ gem 'decent_decoration'
 
 group :development do
   gem "better_errors"
+  gem 'pry'
 end
 
 group :development, :test do
