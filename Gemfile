@@ -68,6 +68,7 @@ group :test do
   gem "capybara-webkit", '~> 1.3.1'
   gem 'database_cleaner', '~> 1.3.0'
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'shoulda-matchers'
 end
 
 group :production do
