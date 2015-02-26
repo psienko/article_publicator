@@ -1,3 +1,5 @@
+- resource_name = :user if resource_name.blank?
+- devise_mapping = Devise.mappings[:user] if devise_mapping.blank?
 - if controller_name != 'sessions'
   = link_to "Log in", new_session_path(resource_name)
   %br/
