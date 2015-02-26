@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass'
-gem 'devise', '~> 3.3.0'
+gem 'devise', '~> 3.4.1'
 gem 'devise-bootstrap-views', '~> 0.0.3'
 gem 'button_link_to', '~> 0.0.4'
 gem 'draper', '~> 1.3.1'
