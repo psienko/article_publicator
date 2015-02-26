@@ -3,7 +3,17 @@
   .panel-heading
     %h4= t('.sign_up', :default => "Sign up")
   .panel-body
-    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f|
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form", multipart: true }) do |f|
+      .form-group
+        = f.label :avatar do
+          = f.file_field :avatar 
+          = f.hidden_field :avatar_cache
+      .form-group
+        = f.label :Firstname
+        = f.text_field :firstname, autofocus: true, class: "form-control"
+      .form-group
+        = f.label :lastname
+        = f.text_field :lastname, autofocus: true, class: "form-control"
       .form-group
         = f.label :email
         = f.email_field :email, autofocus: true, class: "form-control"
