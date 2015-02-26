@@ -30,10 +30,10 @@ gem 'button_link_to', '~> 0.0.4'
 gem 'draper', '~> 1.3.1'
 gem 'carrierwave', '~> 0.10.0'
 gem "mini_magick"
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
 gem 'rails_layout'
 gem "haml-rails", "~> 0.8"
+gem 'decent_exposure'
+gem 'decent_decoration'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
