@@ -12,5 +12,10 @@
     %header
       = render 'layouts/navigation'
     %main{:role => "main"}
-      = render 'layouts/messages'
-      = yield
+      .container-fluid
+        .row
+          .col-lg-12
+            = render 'layouts/messages'
+        .row
+          .col-lg-12
+            = yield
