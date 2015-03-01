@@ -5,8 +5,8 @@
   .panel-body
     = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { method: :put, multipart: true }) do |f|
       .form-group
+        = image_tag current_user.avatar_path, alt: 'avatar', class:'img-responsive img-rounded', size: '150x200'
         - if current_user.avatar.url.present?
-          = image_tag(current_user.avatar.url) 
           = f.label :remove_avatar 
           = f.check_box :remove_avatar 
         = f.file_field :avatar  
