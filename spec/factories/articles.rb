@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :article do
-    title 'MyString'
-    content 'MyText'
+    title 'MyTitle'
+    content 'Content'
     published false
     user
   end
