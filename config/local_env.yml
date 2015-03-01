@@ -1,0 +1,6 @@
+development:
+  DEFAULT_AVATAR: /uploads/user/avatar/default_avatar.gif
+test:
+  DEFAULT_AVATAR: /uploads/user/avatar/default_avatar.gif
+production:
+  DEFAULT_AVATAR: /uploads/user/avatar/default_avatar.gif

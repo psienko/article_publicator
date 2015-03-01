@@ -24,14 +24,14 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass'
-gem 'devise', '~> 3.3.0'
+gem 'devise', '~> 3.4.1'
 gem 'devise-bootstrap-views', '~> 0.0.3'
 gem 'button_link_to', '~> 0.0.4'
-gem 'draper', '~> 1.3.1'
-gem 'carrierwave', '~> 0.10.0'
+gem 'draper'
+gem 'carrierwave'
 gem "mini_magick"
 gem 'rails_layout'
-gem "haml-rails", "~> 0.8"
+gem "haml-rails"
 gem 'decent_exposure'
 gem 'decent_decoration'
 
@@ -57,16 +57,18 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'pry'
+  gem 'rspec-rails'
+  gem "factory_girl_rails"
+  gem 'shoulda-matchers'
+  gem 'poltergeist'
+  gem 'capybara'
+  gem "capybara-webkit"
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 group :test do
-	gem 'rspec-rails', '~> 3.0'
-  gem 'poltergeist', '~> 1.5.1'
-  gem "factory_girl_rails", "~> 4.0"
-  gem 'capybara', '~> 2.4.1'
-  gem "capybara-webkit", '~> 1.3.1'
-  gem 'database_cleaner', '~> 1.3.0'
-  gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'database_cleaner'
 end
 
 group :production do

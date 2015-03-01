@@ -35,12 +35,18 @@ img {
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #eee;
   padding-bottom: 80px;
   width: 100%;
-  margin-top: 51px; // accommodate the navbar
+  margin-top: 5px; // accommodate the navbar
   }
 section {
   @extend .row;
   margin-top: 20px;
   }
+
+.btn-xl {  
+    padding: 15px 22px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 6px
+}

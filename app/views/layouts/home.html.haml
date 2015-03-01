@@ -12,10 +12,9 @@
     %header
       = render 'layouts/navigation'
     %main{:role => "main"}
-      .container-fluid
-        .row
-          .col-lg-12
-            = render 'layouts/messages'
-        .row
-          .col-lg-12
-            = yield
+      .row
+        .col-lg-8
+          = render 'layouts/parts/welcome_jumbotron'
+        .col-lg-3.col-lg-offset-1
+          = render 'layouts/messages'
+          = yield unless user_signed_in?
