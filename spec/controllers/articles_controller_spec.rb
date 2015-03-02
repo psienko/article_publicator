@@ -143,7 +143,7 @@ describe ArticlesController do
 
         it 'renders error message' do
           get :edit, id: article.to_param
-          expect(controller.flash[:error]).to eq 'Access denied!'
+          expect(controller.flash[:alert]).to eq 'Access denied!'
         end
       end
 
@@ -155,7 +155,7 @@ describe ArticlesController do
 
         it 'renders error message' do
           put :update, id: article.to_param, article: valid_attributes
-          expect(controller.flash[:error]).to eq 'Access denied!'
+          expect(controller.flash[:alert]).to eq 'Access denied!'
         end
       end
 
@@ -167,7 +167,7 @@ describe ArticlesController do
 
         it 'renders error message' do
           delete :destroy, id: article.to_param
-          expect(controller.flash[:error]).to eq 'Access denied!'
+          expect(controller.flash[:alert]).to eq 'Access denied!'
         end
       end
     end
@@ -185,7 +185,7 @@ describe ArticlesController do
       it 'renders error message' do
         get :edit, id: article.to_param
         expected_message = 'You need to sign in or sign up before continuing.'
-        expect(controller.flash[:error]).to eq expected_message
+        expect(controller.flash[:alert]).to eq expected_message
       end
     end
 
@@ -198,7 +198,7 @@ describe ArticlesController do
       it 'renders error message' do
         put :update, id: article.to_param, article: valid_attributes
         expected_message = 'You need to sign in or sign up before continuing.'
-        expect(controller.flash[:error]).to eq expected_message
+        expect(controller.flash[:alert]).to eq expected_message
       end
     end
 
@@ -211,7 +211,7 @@ describe ArticlesController do
       it 'renders error message' do
         delete :destroy, id: article.to_param
         expected_message = 'You need to sign in or sign up before continuing.'
-        expect(controller.flash[:error]).to eq expected_message
+        expect(controller.flash[:alert]).to eq expected_message
       end
     end
   end
