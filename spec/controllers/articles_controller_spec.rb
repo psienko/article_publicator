@@ -87,7 +87,7 @@ describe ArticlesController do
         describe 'with valid params' do
           it 'updates the requested article' do
             Article.any_instance.should_receive(:update)
-            .with({ 'title' => 'title', 'content' => 'content', 'published' => 'true' })
+            .with({ 'title' => 'title', 'content' => 'content', 'published' => true })
             put :update, id: article.to_param, article: valid_attributes
           end
 
