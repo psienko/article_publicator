@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   layout :layout_by_resource
 
+  decent_configuration do
+    strategy DecentExposure::StrongParametersStrategy
+  end
+
   protected
 
   def configure_permitted_parameters
