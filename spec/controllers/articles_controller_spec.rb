@@ -40,12 +40,6 @@ describe ArticlesController do
           expect(response).to redirect_to(Article.last)
         end
 
-        it 'exposes a newly created article as article' do
-          post :create, article: valid_attributes
-          expect(controller.article).to be_a(Article)
-          expect(controller.article).to be_persisted
-        end
-
         it 'renders success message' do
           post :create, article: valid_attributes
           expected_message = 'The article has been successfully created.'
@@ -69,7 +63,7 @@ describe ArticlesController do
     end
 
     context 'the user is the author' do
-      let(:article) { create :article, published: true, user: user }
+      let!(:article) { create :article, published: true, user: user }
 
       describe 'GET edit' do
         it "renders 'edit' template" do
@@ -93,7 +87,7 @@ describe ArticlesController do
 
           it 'exposes the lastly updated article' do
             put :update, id: article.to_param, article: valid_attributes
-            expect(controller.article).to eq(updated_article)
+            expect(controller.article).to eq(article)
           end
 
           it 'redirects to the updated article' do
