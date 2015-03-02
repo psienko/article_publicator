@@ -63,7 +63,19 @@ describe ArticlesController do
     end
 
     context 'the user is the author' do
-      let!(:article) { create :article, published: true, user: user }
+      let!(:article) { create :article, user: user }
+
+      describe 'GET show' do
+        it 'expose the requested article when the article is unpublished' do
+          get :show, id: article.to_param
+          expect(controller.article).to eq(article)
+        end
+
+        it 'redirects to requested article' do
+          get :show, id: article.to_param
+          expect(response).to redirect_to(article)
+        end
+      end
 
       describe 'GET edit' do
         it "renders 'edit' template" do
@@ -81,7 +93,7 @@ describe ArticlesController do
         describe 'with valid params' do
           it 'updates the requested article' do
             Article.any_instance.should_receive(:update)
-            .with({ 'title' => 'title', 'content' => 'content', 'published' => true })
+            .with({ 'title' => 'title', 'content' => 'content', 'published' => false })
             put :update, id: article.to_param, article: valid_attributes
           end
 
@@ -125,13 +137,27 @@ describe ArticlesController do
 
         it 'renders success message' do
           delete :destroy, id: article.to_param
-          expect(controller.flash[:notice]).to eq 'The article has been successfully destroyed.'
+          expected_message = 'The article has been successfully destroyed.'
+          expect(controller.flash[:notice]).to eq expected_message
         end
       end
     end
 
     context 'the user is not the author' do
-      let(:article) { create :article, published: true }
+      let(:article) { create :article }
+
+      describe 'GET show' do
+        it 'renders error message when the article is unpublished' do
+          get :show, id: article.to_param
+          expected_message = 'Access denied! This article has not been published.'
+          expect(controller.flash[:alert]).to eq expected_message
+        end
+
+        it "redirects to 'index' action" do
+          get :show, id: article.to_param
+          expect(response).to redirect_to(articles_path)
+        end
+      end
 
       describe 'GET edit' do
         it 'redirects to show action' do
@@ -172,7 +198,20 @@ describe ArticlesController do
   end
 
   context 'user is not signed in' do
-    let(:article) { create :article, published: true }
+    let(:article) { create :article }
+
+    describe 'GET show' do
+      it 'renders error message when the article is unpublished' do
+        get :show, id: article.to_param
+        expected_message = 'You need to sign in or sign up before continuing.'
+        expect(controller.flash[:alert]).to eq expected_message
+      end
+
+      it 'redirects to the login page' do
+        get :show, id: article.to_param
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
 
     describe 'GET edit' do
       it 'redirects to sign in page' do
@@ -223,8 +262,8 @@ describe ArticlesController do
   end
 
   describe 'GET show' do
-    it 'expose the requested article' do
-      article = create :article
+    it 'expose the requested article when the article is published' do
+      article = create :article, published: true
       get :show, id: article.to_param
       expect(controller.article).to eq(article)
     end
