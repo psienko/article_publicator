@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   validates_presence_of :firstname, :lastname
+  has_many :articles
 
   def avatar_path
     return avatar_url if avatar.present?
