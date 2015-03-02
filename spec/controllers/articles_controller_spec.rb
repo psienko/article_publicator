@@ -53,11 +53,11 @@ describe ArticlesController do
         end
       end
 
-      describe 'with invalida params' do
+      describe 'with invalid params' do
         it 'exposes a newly created but unsaved article' do
           Article.any_instance.stub(:save).and_return(false)
           post :create, article: invalid_attributes
-          expect(controller.category).to be_a_new(Category)
+          expect(controller.article).to be_a_new(Article)
         end
 
         it "re-renders the 'new' template" do
@@ -79,8 +79,7 @@ describe ArticlesController do
 
         it 'exposes the requested article' do
           get :edit, id: article.to_param
-          response.should render_template('new')
-          expect(controller.article).to be_a_new(Article)
+          expect(controller.article).to eq article
         end
       end
 
@@ -104,7 +103,7 @@ describe ArticlesController do
         end
 
         describe 'with invalid params' do
-          it 'exposes the category' do
+          it 'exposes the article' do
             Article.any_instance.stub(:save).and_return(false)
             put :update, id: article.to_param, article: valid_attributes
             expect(controller.article).to eq(article)
@@ -128,6 +127,11 @@ describe ArticlesController do
         it 'redirects to the articles list' do
           delete :destroy, id: article.to_param
           response.should redirect_to(articles_path)
+        end
+
+        it 'renders success message' do
+          delete :destroy, id: article.to_param
+          expect(controller.flash[:notice]).to eq 'The article has been successfully destroyed.'
         end
       end
     end
