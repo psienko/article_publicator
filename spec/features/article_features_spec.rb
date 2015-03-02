@@ -12,13 +12,15 @@ feature 'User can see the article' do
     expect_article_page(unpublished_article)
   end
 
-  scenario 'The user who is not the author can not see the unpublished article' do
+  scenario 'The user who is not the author can not see the unpublished ' \
+           'article and see error alert' do
     log_in_with(user.email, user.password)
     visit article_path(unpublished_article)
     expect_error_alert_with(:unpublished)
   end
 
-  scenario 'The guest can not see the unpublished article' do
+  scenario 'The guest can not see the unpublished article, ' \
+           'is redirected to sign in page and see error alert' do
     visit article_path(unpublished_article)
     expect_redirect_to_sign_in_form
     expect_error_alert_with(:unpublished)
@@ -74,7 +76,7 @@ feature 'Signed in user can create and publish the article' do
     expect_success(:published)
   end
 
-  scenario 'Signed in user can not save or publish article with invalid params' do
+  scenario 'Signed in user see errors when params are invalid' do
     log_in_with(user.email, user.password)
     visit new_article_path
     fill_form(invalid_params)
@@ -102,7 +104,7 @@ feature 'The author can update and publish his article' do
     expect_error_alert_with(:lack_of_authentication)
   end
 
-  scenario 'The user who is not the author can not update article' do
+  scenario 'The user who is not the author see alert with access denied' do
     log_in_with(user.email, user.password)
     visit edit_article_path(article)
     fill_form(valid_params)
