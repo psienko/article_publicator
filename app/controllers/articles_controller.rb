@@ -2,7 +2,8 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_filter :require_author, only: [:edit, :update, :destroy]
   before_filter :require_published, only: :show
-  expose(:articles)
+  
+  expose(:visible_articles) { Article.where(published: true) }
   expose(:article)
   
   def index
