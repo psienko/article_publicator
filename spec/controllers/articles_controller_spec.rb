@@ -254,10 +254,11 @@ describe ArticlesController do
   end
 
   describe 'GET index' do
-    it 'expose all articles' do
-      article = create :article
+    it 'expose all published articles' do
+      create :article
+      article = create :article, published: true
       get :index
-      expect(controller.articles).to eq([article])
+      expect(controller.visible_articles).to eq([article])
     end
   end
 
