@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_filter :require_author, only: [:edit, :update, :destroy]
+  before_filter :require_published, only: :show
   expose(:articles)
   expose(:article)
   
@@ -58,6 +59,18 @@ class ArticlesController < ApplicationController
     if current_user != article.user
       redirect_to article_path(article)
       flash[:alert] = 'Access denied!'
-    end    
+    end
+  end
+
+  def require_published
+    return true if article.published?
+    case user_signed_in?
+    when true
+      flash[:alert] = 'Access denied! This article has not been published yet.'
+      redirect_to articles_path
+    when false
+      flash[:alert] = 'You need to sign in or sign up before continuing.'
+      redirect_to new_user_session_path
+    end if article.user != current_user
   end
 end
