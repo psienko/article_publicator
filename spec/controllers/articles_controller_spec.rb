@@ -66,14 +66,14 @@ describe ArticlesController do
       let!(:article) { create :article, user: user }
 
       describe 'GET show' do
-        it 'expose the requested article when the article is unpublished' do
+        it 'exposes the requested article when the article is unpublished' do
           get :show, id: article.to_param
           expect(controller.article).to eq(article)
         end
 
-        it 'redirects to requested article' do
+        it 'renders show template' do
           get :show, id: article.to_param
-          expect(response).to redirect_to(article)
+          expect(response).to render_template('show')
         end
       end
 
@@ -149,7 +149,7 @@ describe ArticlesController do
       describe 'GET show' do
         it 'renders error message when the article is unpublished' do
           get :show, id: article.to_param
-          expected_message = 'Access denied! This article has not been published.'
+          expected_message = 'Access denied! This article has not been published yet.'
           expect(controller.flash[:alert]).to eq expected_message
         end
 
@@ -254,7 +254,7 @@ describe ArticlesController do
   end
 
   describe 'GET index' do
-    it 'expose allarticles' do
+    it 'expose all articles' do
       article = create :article
       get :index
       expect(controller.articles).to eq([article])
@@ -266,6 +266,12 @@ describe ArticlesController do
       article = create :article, published: true
       get :show, id: article.to_param
       expect(controller.article).to eq(article)
+    end
+
+    it 'renders show template' do
+      article = create :article, published: true
+      get :show, id: article.to_param
+      expect(response).to render_template('show')
     end
   end
 end
