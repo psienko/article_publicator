@@ -1,0 +1,22 @@
+= link_to 'New', new_article_path
+.row
+  .col-xs-12.col-sm-10.col-md-9
+    .container
+      .row
+        - visible_articles.each do |article|
+          .col-xs-12.col-sm-6.col-md-3
+            .thumbnail
+              %img{src: "http://placehold.it/600x270", alt:""}
+              .caption
+                %h4.text-center 
+                  = article.title
+                %p
+                  = article.short_content
+                %p.text-right
+                  %i
+                    = article.author
+                %p.text-left
+                  = article.read_button('btn-lg')
+                 
+  .col-md.3
+    activites and other
