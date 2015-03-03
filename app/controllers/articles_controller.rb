@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_filter :require_author, only: [:edit, :update, :destroy]
   before_filter :require_published, only: :show
   
-  expose(:visible_articles) { Article.where(published: true) }
+  expose(:visible_articles) { Article.where(published: true).decorate }
   expose(:article)
   
   def index
