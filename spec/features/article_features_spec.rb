@@ -23,7 +23,7 @@ feature 'User can see the article' do
            'is redirected to sign in page and see error alert' do
     visit article_path(unpublished_article)
     expect_redirect_to_sign_in_form
-    expect_error_alert_with(:unpublished)
+    expect_error_alert_with(:lack_of_authentication)
   end
 
   scenario 'The guest can see the published article' do
@@ -107,7 +107,6 @@ feature 'The author can update and publish his article' do
   scenario 'The user who is not the author see alert with access denied' do
     log_in_with(user.email, user.password)
     visit edit_article_path(article)
-    fill_form(valid_params)
     expect_error_alert_with(:access_denied)
   end
 
@@ -150,7 +149,7 @@ def expect_error_alert_with(type_of_alert)
   expect_error_alert
   case type_of_alert
   when :unpublished
-    expect(page).to have_content('Access denied! This article has not been published.')
+    expect(page).to have_content('Access denied! This article has not been published yet.')
   when :access_denied
     expect(page).to have_content('Access denied!')
   when :lack_of_authentication
@@ -167,7 +166,7 @@ def expect_success(type)
     expect(page).to have_content('The article has been successfully created.')
   when :published
     expect(page).to have_content('Your article has been published.')
-   when :updated
-    expect(page).to have_content('Your article has been updated.')
+  when :updated
+    expect(page).to have_content('The article has been successfully updated.')
   end
 end
