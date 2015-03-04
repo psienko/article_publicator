@@ -13,5 +13,17 @@
     = f.label :content
     = f.text_area :content, class: 'form-control'
 
-  = f.submit 'Save', class: 'btn btn-default'
-  = f.submit 'Publish', name: 'publish', class: 'btn btn-default'
+  = button_tag class: 'btn btn-success' do
+    Save
+    %span.glyphicon.glyphicon-save
+    %b /
+    %span.glyphicon.glyphicon-eye-open
+
+  - unless article.published?
+    = button_tag class: 'btn btn-black', name: 'publish' do
+      Publish
+      %span.glyphicon.glyphicon-share
+  - if article.published?
+    = button_tag class: 'btn btn-warning', name: 'unpublish' do
+      Unublish
+      %span.glyphicon.glyphicon-share  

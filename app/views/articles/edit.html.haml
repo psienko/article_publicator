@@ -1,7 +1,22 @@
-.panel.panel-primary
-  .panel-heading
-    %h1.panel-title New article
-  .panel-body
-    = render 'form'
-  .panel-footer  
-    = link_to 'Back', :back
+.row
+  - if user_signed_in? && current_user == article.user
+    .col-lg-12
+      = render 'articles/shared/links'
+    - unless article.published?
+      .col-lg-12
+        .bs-callout.bs-callout-warning
+          %h4 The article is unpublished
+          %p No one except you can not see this article. When you are finished editing then publish it.
+.row
+  .col-lg-12
+    %br
+
+.row
+  .col-lg-12
+    .panel.panel-inverse
+      .panel-heading
+        %h1.panel-title New article
+      .panel-body
+        = render 'form'
+      .panel-footer  
+        = link_to 'Back', :back

@@ -1,0 +1,27 @@
+%ul.nav.nav-tabs
+  %li{role: "presentation"}
+    .pull-left
+      = link_to :back, class: 'btn btn-default' do
+        %span.glyphicon.glyphicon-chevron-left
+          Back
+      - unless controller.action_name == 'show'
+        = article.read_button
+      - unless controller.action_name =='edit'  
+        = article.edit_button
+      = article.delete_button
+  %li.pull-right{role: "presentation"}
+    - unless controller.action_name == 'edit'
+      = form_for [article], class: 'form-inline' do |f|
+        - unless article.published?
+          = button_tag class: 'btn btn-black', name: 'publish' do
+            Publish
+            %span.glyphicon.glyphicon-share
+        - if article.published?
+          = button_tag class: 'btn btn-warning', name: 'unpublish' do
+            Unublish
+            %span.glyphicon.glyphicon-share
+
+        .form-group
+          = f.hidden_field :title, class: 'form-control'
+        .form-group
+          = f.hidden_field :content, class: 'form-control'

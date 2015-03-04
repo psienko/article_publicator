@@ -1,6 +1,30 @@
 .row
-  .col.lg.8
-    %h1{contenteditable: 'true'}
-      = article.title
-    %p{contenteditable: 'true'}
-      = article.content
+  - if user_signed_in? && current_user == article.user
+    .col-lg-12
+      = render 'articles/shared/links'
+    - unless article.published?
+      .col-lg-12
+        .bs-callout.bs-callout-warning
+          %h4 The article is unpublished
+          %p No one except you can not see this article. When you are finished editing then publish it.
+%br
+.row
+  .col-lg-8
+    .panel.panel-default
+      %h3
+        .row
+          .col-md-3
+            %div
+              = link_to root_path do
+                = image_tag article.user.avatar_path(:thumb), alt: 'avatar', class:'img-responsive img-thumbnail img-circle'
+            %div
+              %strong 
+                %i= article.author 
+            .badge
+              Created at: 
+              %i=article.created_at.to_date 
+      .panel-body
+        %h1
+          = article.title
+        %p
+          = article.content
