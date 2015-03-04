@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   before_filter :require_published, only: :show
   
   expose(:visible_articles) { Article.where(published: true).decorate }
-  expose(:article)
+  expose_decorated(:article)
   
   def index
   end
@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
   def create
     article = Article.new(article_params)
     article.user_id = current_user.id
-    article.published = params[:publish] ? true : false
+    article.published = publish_or_unpublish
     if article.save
       redirect_to article_path(article)
       flash[:notice] = 'The article has been successfully created.' unless article.published?
@@ -34,7 +34,7 @@ class ArticlesController < ApplicationController
 
   def update
     update_params = article_params
-    update_params[:published] = params[:publish] ? true : false
+    update_params[:published] = publish_or_unpublish
     if article.update(update_params)
       redirect_to article_path(article)
       flash[:notice] = 'The article has been successfully updated.' unless article.published?
@@ -73,5 +73,10 @@ class ArticlesController < ApplicationController
       flash[:alert] = 'You need to sign in or sign up before continuing.'
       redirect_to new_user_session_path
     end if article.user != current_user
+  end
+
+  def publish_or_unpublish
+    return true if params[:publish]
+    false if params[:unpublish]
   end
 end
