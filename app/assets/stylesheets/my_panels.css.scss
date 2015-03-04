@@ -1,0 +1,39 @@
+@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+
+border-color: $border;
+& > .panel-heading {
+color: $heading-text-color;
+background-color: $heading-bg-color;
+border-color: $heading-border;
++ .panel-collapse > .panel-body {
+border-color: $border;
+}
+.badge {
+color: $heading-bg-color;
+background-color: $heading-text-color;
+}
+}
+& > .panel-footer {
++ .panel-collapse > .panel-body {
+border-bottom-color: $border;
+}
+}
+}
+
+$brand-inverse: #2E2E2E !default;
+$panel-inverse-text: #fff !default;
+$panel-inverse-border: $brand-inverse !default;
+$panel-inverse-heading-bg: $brand-inverse !default;
+
+
+.panel-inverse {
+@include panel-variant($panel-inverse-border, $panel-inverse-text, $panel-inverse-heading-bg, $panel-inverse-border);
+}
+
+.panel-inverses{
+  border-color: #2E2E2E;
+  .panel-heading {
+    background-color: #2E2E2E;
+    border-color: #2E2E2E;
+  }
+}
