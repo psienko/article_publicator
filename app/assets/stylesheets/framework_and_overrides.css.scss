@@ -2,6 +2,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+//colors
+$white: #fff;
+$dark-gray: #555;
+$mercury: #e5e5e5;
+$black_5: rgba(0,0,0,.05);
+$black: #000000;
+$bright-black: #282828;
+
 // make all images responsive by default
 img {
   @extend .img-responsive;
@@ -49,4 +57,27 @@ section {
     font-size: 24px;
     line-height: 1.33;
     border-radius: 6px
+}
+
+div.inline {
+    display:inline;
+}
+
+.btn-black {
+  color: $white;
+  background-color: $bright-black;
+  &:hover {
+    color: $white;
+    background-color: $black;
+  }
+}
+
+.hover-green {
+  &:hover {
+    color: #009900;
+  }
+}
+
+.pointer {
+  cursor: pointer;
 }

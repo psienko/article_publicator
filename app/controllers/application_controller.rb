@@ -5,13 +5,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   layout :layout_by_resource
 
+  decent_configuration do
+    strategy DecentExposure::StrongParametersStrategy
+  end
+
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:firstname, :lastname, :email, :password,
       :password_confirmation, :remember_me, :avatar, :avatar_cache) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:firstname, :lastname, :email, :password,
-      :password_confirmation, :current_password, :avatar, :avatar_cache) }
+      :password_confirmation, :current_password, :avatar, :avatar_cache, :remove_avatar) }
   end
 
   def layout_by_resource

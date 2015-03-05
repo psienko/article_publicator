@@ -7,9 +7,10 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   validates_presence_of :firstname, :lastname
+  has_many :articles
 
-  def avatar_path
-    return avatar_url if avatar.present?
+  def avatar_path(option = nil)
+    return avatar.url(option) if avatar.present?
     '/uploads/user/avatar/default_avatar.gif'
   end
 
