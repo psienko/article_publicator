@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates_presence_of :firstname, :lastname
   has_many :articles
 
-  def avatar_path(option=nil)
+  def avatar_path(option = nil)
     return avatar.url(option) if avatar.present?
     '/uploads/user/avatar/default_avatar.gif'
   end
