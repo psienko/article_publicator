@@ -77,6 +77,6 @@ class ArticlesController < ApplicationController
 
   def publish_or_unpublish
     return true if params[:publish]
-    false if params[:unpublish]
+    false if params[:unpublish] || article.published.blank?
   end
 end
