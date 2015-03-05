@@ -35,6 +35,8 @@ gem "haml-rails"
 gem 'decent_exposure'
 gem 'decent_decoration'
 gem 'acts_as_commentable_with_threading'
+gem 'angularjs-rails'
+gem 'angularjs-rails-resource', '~> 2.0.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
