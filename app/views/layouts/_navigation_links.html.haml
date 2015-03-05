@@ -1,11 +1,21 @@
 %ul.nav.navbar-nav.navbar-right
   -if user_signed_in?
     %li= link_to 'Read', articles_path
-    %li= link_to 'Publish your article', new_article_path
+    %li= link_to 'Publish article', new_article_path
     %li=link_to 'My Profile', edit_user_registration_path
-    %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
+    %li 
+      %a#dropdownMenu3.dropdown-toggle.pointer{"aria-expanded" => "true", "data-toggle" => "dropdown", type: "button"}
+        %span.glyphicon.glyphicon-user
+        = current_user.email
+        %span.caret
+      
+      %ul.dropdown-menu.navbar-inverse.navbar-nav{'aria-labelledby' => 'dropdownMenu3', role: 'menu' }
+        %li{role: 'presentation'}
+          = link_to destroy_user_session_path, method: :delete do
+            %span.glyphicon.glyphicon-off
+            Sign Out
   -else
     %li= link_to 'Read', articles_path
-    %li= link_to 'Publish your article', new_article_path
+    %li= link_to 'Publish article', new_article_path
     %li= link_to 'Sign In', new_user_session_path
     %li= link_to 'Sign Up', new_user_registration_path
