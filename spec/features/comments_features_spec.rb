@@ -26,7 +26,6 @@ feature 'Signed in users can add a comment' do
   let(:user) { create :user, firstname: 'John', lastname: 'Doe' }
   let(:article) { create :article }
   let(:date) {  DateTime.new(2015, 1, 1, 0, 0, 0, '+0') }
-  # .strftime'%d-%m-%Y at %H:%M'
   
   scenario 'Signed in user can see added comment' do
     log_in_with(user.email, user.password)
