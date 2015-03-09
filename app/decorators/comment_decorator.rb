@@ -1,13 +1,12 @@
 class CommentDecorator < Draper::Decorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def author
+    "#{object.user.firstname.capitalize} #{object.user.lastname.capitalize}" if object.user
+  end
+
+  def date
+    object.created_at.strftime'%d-%m-%Y at %H:%M'
+  end
 
 end
