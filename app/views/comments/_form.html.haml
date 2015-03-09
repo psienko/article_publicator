@@ -1,0 +1,14 @@
+- if signed_in?
+  %ol
+    %form#comment_form{"ng-submit" => "createComment()"}
+      %fieldset
+        .control-group{"ng-class" => "{ 'error': errors }"}
+          %textarea#new_comment.styled{'ng-model' => 'comment.body', placeholder: 'Enter Comment', rows: '3', name: 'new_comment'}
+          %button.btn.btn-primary.pull-right{type: 'submit', 'ng-disabled' => '!comment.body'} Comment
+          %div{"ng-if" => "errors"}
+            %p.help-block.error
+              {{errors}}
+- else
+  .sign_in
+    = link_to "Sign in", new_user_session_path
+    to add comment.
