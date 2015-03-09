@@ -37,6 +37,7 @@ gem 'decent_decoration'
 gem 'acts_as_commentable_with_threading'
 gem 'angularjs-rails'
 gem 'angularjs-rails-resource', '~> 2.0.0'
+gem 'active_model_serializers'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -71,7 +72,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner'
+  gem 'database_cleaner' 
 end
 
 group :production do
