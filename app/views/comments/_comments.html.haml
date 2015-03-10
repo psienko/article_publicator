@@ -1,0 +1,30 @@
+:javascript
+  window.Id = "#{article.id}"
+
+%div{"ng-controller" => "CommentController"}
+  %div{"ng-if" => "commentUpdated"}
+    .alert.alert-success
+      %button.close{"data-dismiss" => "alert", type: "button"} &times;
+      Comment was successfuly added!
+  Comments 
+  %span.badge
+    {{comments.length}}
+
+  = render 'comments/form'  
+
+
+  %ol.comments
+    %div.row.comment{"ng-repeat" => "comment in comments"}
+      %span.comment-author.col-md-2
+        <img ng-src="{{comment.user.avatarThumbPath}}"  alt= 'avatar', class= 'img-responsive img-circle pull-left' height="50" width="40">
+        %span{class: 'comment-{{comment.id}} posted-by'}
+          {{comment.author}} 
+      %li.col-md-10{class: 'comment-{{comment.id}}'}
+        %div.row
+        %span.col-md-12.content
+          {{comment.body}}
+        %span.timestamp.col-md-12
+          %span.pull-right{class: 'comment-{{comment.id}} posted-at'}
+            {{comment.date}}
+
+  

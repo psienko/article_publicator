@@ -34,6 +34,10 @@ gem 'rails_layout'
 gem "haml-rails"
 gem 'decent_exposure'
 gem 'decent_decoration'
+gem 'acts_as_commentable_with_threading'
+gem 'angularjs-rails'
+gem 'angularjs-rails-resource', '~> 2.0.0'
+gem 'active_model_serializers', '~> 0.8.3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -57,7 +61,7 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'pry'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem "factory_girl_rails"
   gem 'shoulda-matchers'
@@ -68,7 +72,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner'
+  gem 'database_cleaner' 
 end
 
 group :production do

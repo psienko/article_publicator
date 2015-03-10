@@ -3,10 +3,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   before_filter :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
+  after_filter :set_csrf_cookie_for_ng
   layout :layout_by_resource
 
   decent_configuration do
     strategy DecentExposure::StrongParametersStrategy
+  end
+
+  def set_csrf_cookie_for_ng
+    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
   end
 
   protected
@@ -24,4 +29,10 @@ class ApplicationController < ActionController::Base
     return 'home' if devise_controller? || controller_name == 'home'
     'application'
   end
+
+  # In Rails 4.2 and above
+  def verified_request?
+    super || valid_authenticity_token?(session, request.headers['X-XSRF-TOKEN'])
+  end
+  
 end
