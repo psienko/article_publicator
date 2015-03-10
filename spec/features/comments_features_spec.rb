@@ -44,15 +44,11 @@ feature 'Signed in users can add a comment', :js do
   end
 
   def add_comment(body)
-    within("#comment_form") do
-      fill_in 'new_comment', with: body
-      click_button 'Comment'
-    end
-    binding.pry
+    fill_in 'new_comment', with: body
+    click_button 'Comment'
   end
 
   def expect_comment
-    new_comment = Comment.find_by_body('MyNewComment')
-    expect(page).to have_css(".comment", text: 'MyNewComment')
+    expect(page).to have_css('.comment', text: 'MyNewComment')
   end
 end
