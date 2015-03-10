@@ -8,7 +8,7 @@ require 'capybara/poltergeist'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 Capybara.default_driver = :poltergeist
@@ -16,15 +16,25 @@ Capybara.default_driver = :poltergeist
 RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
-  
+
   config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
   end
 
   config.before(:each) do
+    DatabaseCleaner.start
     DatabaseCleaner.clean
   end
 
+  config.use_transactional_fixtures = false
   Capybara.javascript_driver = :poltergeist
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(app, phantomjs: Phantomjs.path)
